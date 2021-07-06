@@ -1,0 +1,28 @@
+{
+  "name": "artisium-task2-login-jwt-",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Infamia2334/Artisium-task2-Login-jwt-.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Infamia2334/Artisium-task2-Login-jwt-/issues"
+  },
+  "homepage": "https://github.com/Infamia2334/Artisium-task2-Login-jwt-#readme",
+  "dependencies": {
+    "bcrypt": "^5.0.1",
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^10.0.0",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.13.2"
+  }
+}
