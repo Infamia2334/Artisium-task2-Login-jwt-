@@ -1,7 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const mongoose = require("mongoose")
-const User = require("../models/User")
+
 
 
 
@@ -26,23 +26,21 @@ router.post('/', (req, res)=>{
     })
 })
 
-router.get("/login", (req, res)=>{
-    res.render("signin")
-})
 
 
-router.post("/login",async (req, res)=>{
-    try{
-        const user = await User.findByCredentials(req.body.username, req.body.password)
-        const token = await user.generateAuthToken()
-        res.status(200).send({user: user, token: token})
-    }
-    catch(e){
-        console.log(e)
-        res.status(400).send()
-    }
+
+// router.post("/login",async (req, res)=>{
+//     try{
+//         const user = await User.findByCredentials(req.body.username, req.body.password)
+//         const token = await user.generateAuthToken()
+//         res.status(200).send({user: user, token: token})
+//     }
+//     catch(e){
+//         console.log(e)
+//         res.status(400).send()
+//     }
     
-})
+// })
 
 
 module.exports = router
