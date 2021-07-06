@@ -17,14 +17,16 @@ app.get('/', (req, res)=> {
     res.send("Welcome, please login with API")
 })
 
+
 app.set("views", "./views")
 app.set("view engine", "ejs")
 
 const userRoute = require("./router/user")
-
+const loginRoute = require("./router/login")
 
 
 app.use("/User", userRoute)
+app.use("/login", loginRoute)
 
 
 
