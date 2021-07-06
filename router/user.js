@@ -26,6 +26,10 @@ router.post('/', (req, res)=>{
     })
 })
 
+router.get("/login", (req, res)=>{
+    res.render("signin")
+})
+
 
 router.post("/login",async (req, res)=>{
     try{
