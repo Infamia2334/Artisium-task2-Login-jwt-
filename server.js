@@ -9,10 +9,29 @@ const port = process.env.PORT || 3000
 
 mongoose.connect(process.env.DB_URL, {useNewUrlParser: true,useUnifiedTopology:true,useFindAndModify: true, useCreateIndex: true}).then(()=>console.log("Connected to DB successfully")).catch(err => console.log(err))
 
-// app.use((req, res, next)=>{
-//     console.log(req.method, req.path)
-//     next()
-// })
+// var testConn = undefined
+const conn = mongoose.createConnection("mongodb://172.105.40.182:27017/plc",{ user: "plc_1",
+pass: "767FWGF43a",
+useNewUrlParser: true,
+useUnifiedTopology: true,
+useCreateIndex: true,
+useFindAndModify: false})
+// .then((res) => {
+//     console.log("Connceted to plc mongo db Successfully!");
+//     testConn = res
+//     return res
+// }).catch(err =>{console.log(err)})
+
+const plcSchema = mongoose.Schema({
+        modbus: Object,
+        inserted_time: Date
+    })
+
+const Plc = conn.model("PLC_1", plcSchema)
+module.exports = Plc
+// console.log(Object.keys(conn))
+
+
 
 
 app.use(express.json())
@@ -32,9 +51,10 @@ app.set("view engine", "ejs")
 const userRoute = require("./router/user")
 const loginRoute = require("./router/login")
 
-
+// app.use("/controller", controllerRoute)
 app.use("/User", userRoute)
 app.use("/login", loginRoute)
+
 
 
 

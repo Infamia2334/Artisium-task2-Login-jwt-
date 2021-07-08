@@ -272,3 +272,42 @@ Chart.pluginService.register({
     }
   });
   
+
+  $(document).ready(function ($) {
+let interval = 5000;
+function updateDashboard(data, status, xhr) {
+if (data != 0) {
+let arrvalue = [];
+let arrName = [];
+for (let x in data.data) {
+arrName.push(x);
+arrvalue.push(data.data[x]);
+}
+doughnut1(arrName[0], arrvalue[0]);
+doughnut2(arrName[1], arrvalue[1]);
+doughnut3(arrName[2], arrvalue[3]);
+doughnut4(arrName[4], arrvalue[4]);
+}
+}
+function error(error, data, status) {
+console.log('error', error, data, status);
+}
+let AjaxCallDashboard = function () {
+$.ajax({
+type: 'GET',
+url: '/liveData',
+async: true,
+cache: false,
+headers: {
+'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),
+'Content-Type': 'json',
+'Cache-Control': 'No-Store',
+},
+success: updateDashboard,
+error: error
+})
+}
+AjaxCallDashboard();
+setInterval(AjaxCallDashboard, interval);
+})
+
