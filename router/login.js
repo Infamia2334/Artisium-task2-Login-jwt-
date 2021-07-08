@@ -3,9 +3,10 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const User = require("../models/User")
 const auth = require("../middleware/auth")
-
+const moment = require("moment")
 const Plc = require("../server")
 
+const dateFormat = "YYYY-MM-DD HH:mm"
 
 
 
@@ -60,12 +61,16 @@ router.get("/dashboard", auth, async (req, res)=>{
             if(!err){
                 // console.log(found)
                 var d
+                var date
+                var dateTime
                 if(found.length){
                     var keys = []
                     var data_values = []
                     found.forEach(e => {
+                     
                     
                     let result = JSON.stringify(e)
+                    
                     // var result = JSON.stringify(found[e])
                     console.log(result)
                     d = JSON.parse(result)
@@ -74,6 +79,9 @@ router.get("/dashboard", auth, async (req, res)=>{
                     for(var k in d.data){
                         keys.push(k)
                         data_values.push(d.data[k])
+                        date = new Date(e.inserted_time)
+                        console.log(date)
+                        dateTime = moment(date).format(dateFormat)
                     }
                     
                     
@@ -81,7 +89,7 @@ router.get("/dashboard", auth, async (req, res)=>{
                     console.log(keys)
                     console.log(data_values)
                     // res.send(found)
-                    res.render("live", {PLC:found, data_keys: keys, data_values: data_values})
+                    res.render("live", {timestamp: dateTime, data_keys: keys, data_values: data_values})
                 }
                 else{
                     console.log("no data in db")
